@@ -1,0 +1,57 @@
+{% extends "base.html" %} {% block maincontents %}
+<div class="container">
+    <h4 class="text-center">Multilingual Translator</h4>
+    <div class="contain">
+        <div class="row">
+            <div class="col">
+                <form action="{{url_for('home')}}" method="post" enctype="multipart/form-data">
+                    <div class="">
+                        <label for="selector">Select a format option:</label>
+                        <select id="selector" class="form-select" name="problemType" onchange="changeInputType()" required>
+                            <option value="text">Text</option>
+                            <option value="pdf">PDF</option>
+                            <option value="word">Word</option>
+                            <option value="image">Image</option>
+                        </select>
+
+                        <div id="inputField"></div>
+                    </div>
+                    <button type="submit" class="btn btn-success my-2">Translate</button>
+                </form>
+            </div>
+            <div class="col">
+                <textarea name="result" id="result" cols="10" rows="8" disabled class="form-control">
+                    {% if translated_statement %}
+                    {{translated_statement}}
+                    {% else %}
+                    Translated Texts
+                    {% endif %}
+                </textarea>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function changeInputType() {
+        var selector = document.getElementById("selector");
+        var inputField = document.getElementById("inputField");
+
+        if (selector.value == "text") {
+            inputField.innerHTML = '<input type="text" name="textInput" class="form-control" placeholder="Texts" style="margin-top: 10px;">';
+        } else if (selector.value == "pdf") {
+            inputField.innerHTML = '<input type="file" class="form-control" accept=".pdf" name="pdfInput" style="margin-top: 10px;">';
+        } else if (selector.value == "word") {
+            inputField.innerHTML = '<input type="file" accept=".doc,.docx" class="form-control" name="wordInput" style="margin-top: 10px;">';
+        } else if (selector.value == "image") {
+            inputField.innerHTML = '<input type="file" accept="image/*" class="form-control" name="imageInput" style="margin-top: 10px;">';
+        }
+    }
+
+    // Simulate a change event to trigger the default option
+    window.onload = function() {
+        changeInputType();
+    }
+</script>
+
+{% endblock %}

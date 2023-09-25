@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multilingual Translator</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/main_icon.png') }}" type="image/x-icon">
+    <!-- Corrected usage of url_for for static files -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" id="bootstrapCSS">
+    <!--fontawesome cnd-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawsome.css') }}" id="fontawesomeCSS">
+</head>
+
+<body>
+    <nav class="navbar bg-body-tertiary" style="background-color: #d4d5d5;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <img src="{{ url_for('static', filename='img/icon.webp') }}" alt="Logo" width="80" height="30" class="d-inline-block align-text-top">
+            </a>
+        </div>
+    </nav>
+
+    {% block maincontents %} data {% endblock %}
+
+
+    <!--scripts files-->
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+
+</html>
