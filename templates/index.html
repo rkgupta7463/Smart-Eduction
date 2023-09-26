@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Multilingual Translator</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/main_icon.png') }}" type="image/x-icon">
+    <!-- Corrected usage of url_for for static files -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" id="bootstrapCSS">
+    <!--fontawesome cnd-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawsome.css') }}" id="fontawesomeCSS">
+    <!-- Custome CSS -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <!-- AOS -- for animation -->
+    <link href="{{url_for('static',filename='css/aos.css')}}" rel="stylesheet">
+    <link href="{{url_for('static',filename='css/boxicons.min.css')}}" rel='stylesheet'>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style2.css') }}">
+
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="container-fluid m-0 p-0 custome_navbar fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-dark p-1 m-0" style="background-color: rgb(0, 11, 76);">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <img src="{{ url_for('static',filename='img/logo.png') }}" class="img-fluid rounded-circle" alt="" style="width: 40px; height: 40px;">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#services">Services</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#reviews">About</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+    <!-- Landing Page -->
+    <section class="container-fluid m-0 p-0 bg-secondary min-vh-100 border-bottom border-3 border-secondary bg_cover2 pt-5" id="home">
+        <div class="overlay2"></div>
+
+        <div class="container">
+
+            <div class="row">
+                <h3 class="pt-5 text-center h3">Multilingual Translation</h3>
+                <div class="text-center ">
+                    <h5 class="d-inline px-2 bg-success-subtle"> <q>Breaking Language Barriers</q></h5>
+                </div>
+            </div>
+            <div class="row pt-4 ">
+
+                <div class="col-sm">
+
+                    <div class="row p-0 m-0 bg-white take_input custome_card">
+                        <form action="{{url_for('home')}}" method="post" enctype="multipart/form-data">
+                            <div class=" pb-4 p-0 m-0 ">
+                                <div class=" bg_blue_dark text-center p-1 "><b>
+                                    <h3 class="h5 d-inline-block">Select and Upload Document</h3>
+                                    <div class="d-inline-block ps-5">
+                                        <select name="language" id="language" class="p-1">
+                                            <option value="English">English</option>
+                                            <option value="hindi">Hindi</option>
+                                            <option value="telugu">Telugu</option>
+                                            <option value="bangali">Bangali</option>
+                                        </select>
+                                    </div>
+
+                                </b></div>
+
+                                <div class="">
+                                    <label for="selector">Select a format option:</label>
+                                    <select id="selector" onchange="showInput()">
+                                    <option value="text" selected>Text</option>
+                                    <option value="pdf">PDF</option>
+                                    <option value="word">Word</option>
+                                    <option value="image">Image</option>
+                                </select>
+                                </div>
+                                <div id="textOption">
+                                    <textarea id="textArea" class="input_textarea" name="text"></textarea>
+                                </div>
+
+                                <div id="fileOption" style="display: none;">
+                                    <div class="d-flex justify-content-center align-content-center pt-1">
+                                        <label for="fileInput" style="cursor: pointer;" class="bg-info-subtle p-5 rounded-4">
+                                        <i class="fas fa-upload upload_custome"></i>
+                                    </label>
+                                        <input type="file" id="fileInput" style="display: none;" name="files" accept=".pdf, .docx, .jpeg, .jpg, .png" />
+                                    </div>
+                                    <div class="text-center">
+                                        <label for="fileInput" class="text-secondary pt-1  h2" style="cursor: pointer;" id="uploadLabel">Upload Your Document</label>
+                                    </div>
+                                </div>
+
+                                <script>
+                                    function showInput() {
+                                        var selector = document.getElementById("selector");
+                                        var textOption = document.getElementById("textOption");
+                                        var fileOption = document.getElementById("fileOption");
+                                        var uploadLabel = document.getElementById("uploadLabel");
+
+                                        if (selector.value === "text") {
+                                            textOption.style.display = "block";
+                                            fileOption.style.display = "none";
+                                        } else {
+                                            textOption.style.display = "none";
+                                            fileOption.style.display = "block";
+
+                                            if (selector.value === "pdf") {
+                                                uploadLabel.innerText = "Upload Your PDF";
+                                                document.getElementById("fileInput").accept = ".pdf";
+                                            } else if (selector.value === "word") {
+                                                uploadLabel.innerText = "Upload Your Word Document";
+                                                document.getElementById("fileInput").accept = ".docx";
+                                            } else if (selector.value === "image") {
+                                                uploadLabel.innerText = "Upload Your Image";
+                                                document.getElementById("fileInput").accept = ".jpeg, .jpg, .png";
+                                            }
+                                        }
+                                    }
+                                </script>
+                            </div>
+                            <div class="text-center d-flex align-items-end justify-content-center pb-4">
+                                <a type="submit" class="btn btn-sm btn-primary ">Translate <i class="fas fa-file-text"></i></a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-sm take_input ">
+                    <div class="row p-0 m-0 h-100 bg-white custome_card">
+                        <div class=" pb-4 p-0 m-0 ">
+                            <div class=" bg_blue_dark text-center p-1 "><b>
+                                    <h3 class="h5 d-inline-block">Translated Document</h3>
+                                </b></div>
+                            <ul class="pb-3">
+                                <li>Generated Text/PDF/Word here</li>
+                            </ul>
+
+                        </div>
+                        <div class="text-center d-flex align-items-end justify-content-center p-3">
+                            <a href="#" class="btn btn-sm btn-success mt-2">Download <i class="fas fa-download"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Landing Page -->
+    <section class="text-white container-fluid pt-4 m-0 p-0 bg-secondary min-vh-100 border-bottom border-3 border-secondary bg_cover pt-5" id="services">
+        <div class="overlay"></div>
+
+        <div class="container pt-3">
+
+
+            <div class="row">
+                <h3 class="pt-3 text-center h3 text-warning">Services</h3>
+            </div>
+            <div class="row">
+                <h5 class="text-center h5 pb-4"><q>Translate the Different Format in Different Indian Regional
+                        Language</q></h5>
+            </div>
+            <div class="row">
+
+                <div class="col-sm pt-3">
+                    <div class="card custome_card">
+                        <img src="{{ url_for('static',filename='img/texttrans.png') }}" class="card-img-top img-fluid" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title"><b>Text not be Colloquial in Nature</b> </h5>
+                            <p class="card-text">Learning pathway is described as the chosen route taken by a learner through a range of e-learning activities..</p>
+                            <div class="text-center">
+                                <a href="#" class="btn btn-primary">Read More <i class="fas fa-book-reader"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm py-3">
+                    <div class="card custome_card">
+                        <img src="{{url_for('static',filename='img/pdf&word.png')}}" class="card-img-top img-fluid" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title"><b>PDF & Word file</b> </h5>
+                            <p class="card-text">Learning pathway is described as the chosen route taken by a learner through a range of e-learning.</p>
+                            <div class="text-center">
+                                <a href="#" class="btn btn-primary">Read More <i class="fas fa-book-reader"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm pt-3">
+                    <div class="card custome_card card_more">
+                        <img src="{{url_for('static',filename='img/imageTrans.jpeg')}}" class="card-img-top img-fluid" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title"><b>Text of Image</b> </h5>
+                            <p class="card-text">Learning pathway is described as the chosen route taken by a learner through a range of e-learning activities..</p>
+                            <div class="text-center">
+                                <a href="#" class="btn btn-success">Read More <i class="fas fa-book-reader"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+    </section>
+
+
+
+
+
+
+
+
+    <section class="bg-light vh-100 m-0 container-fluid" id="reviews">
+
+        <div class="owl-theme owl-carousel reviews-slider container">
+            <div class="review">
+                <div class="person">
+                    <img src="{{url_for('static',filename='img/emoji.jpg')}}" alt="">
+                    <h5 class="h3">Rishu Gupta</h5>
+                    <small class="h6">Backend Developer</small>
+                </div>
+                <h3>I am student of BCA.</h3>
+                <div class="stars">
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class="bx bxs-star-half"></i>
+                </div>
+                <i class='bx bxs-quote-alt-left'></i>
+            </div>
+            <div class="review">
+                <div class="person">
+                    <img src="{{url_for('static',filename='img/emoji.jpg')}}" alt="">
+                    <h5 class="h3">A. Mustafa</h5>
+                    <small class="h6">Best in Presentation</small>
+                </div>
+                <h3>I am student of B-Tech CSIT.</h3>
+                <div class="stars">
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class="bx bxs-star-half"></i>
+                </div>
+                <i class='bx bxs-quote-alt-left'></i>
+            </div>
+            <div class="review">
+                <div class="person">
+                    <img src="{{url_for('static',filename='img/emoji.jpg')}}" alt="">
+                    <h5 class="h3">Rohit Kumar</h5>
+                    <small class="h6">Frontend Developer</small>
+                </div>
+                <h3>I am student of B-Tech CSIT.</h3>
+                <div class="stars">
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class="bx bxs-star-half"></i>
+                </div>
+                <i class='bx bxs-quote-alt-left'></i>
+            </div>
+
+
+            <div class="review">
+                <div class="person">
+                    <img src="{{url_for('static',filename='img/emoji.jpg')}}" alt="">
+                    <h5 class="h3">Md Saif</h5>
+                    <small class="h6">Backend Developer</small>
+                </div>
+                <h3>I am student of B-Tech CSIT.</h3>
+                <div class="stars">
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class="bx bxs-star-half"></i>
+                </div>
+                <i class='bx bxs-quote-alt-left'></i>
+            </div>
+            <div class="review">
+                <div class="person">
+                    <img src="{{url_for('static',filename='img/emoji.jpg')}}" alt="">
+                    <h5 class="h3">D Bhashkar Ganesh</h5>
+                    <small class="h6">Good in Research</small>
+                </div>
+                <h3>I am student of B-Tech CSE.</h3>
+                <div class="stars">
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class="bx bxs-star-half"></i>
+                </div>
+                <i class='bx bxs-quote-alt-left'></i>
+            </div>
+            <div class="review">
+                <div class="person">
+                    <img src="{{url_for('static',filename='img/emoji.jpg')}}" alt="">
+                    <h5 class="h3">C Abhinaya Sai</h5>
+                    <small class="h6">Best in Presentation</small>
+                </div>
+                <h3>I am student of BCA</h3>
+                <div class="stars">
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class="bx bxs-star-half"></i>
+                </div>
+                <i class='bx bxs-quote-alt-left'></i>
+            </div>
+        </div>
+        <div class="container pt-4 pb-0 d-flex justify-content-center">
+
+            <!-- Section: Social media -->
+            <section class="mb-4">
+                <!-- Facebook -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                        class="fab fa-facebook-f"></i></a>
+
+                <!-- Twitter -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                        class="fab fa-twitter"></i></a>
+
+                <!-- Google -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                        class="fab fa-google"></i></a>
+
+                <!-- Instagram -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                        class="fab fa-instagram"></i></a>
+
+                <!-- Linkedin -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                        class="fab fa-linkedin-in"></i></a>
+
+                <!-- Github -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                        class="fab fa-github"></i></a>
+            </section>
+            <!-- Section: Social media -->
+        </div>
+    </section>
+
+
+    <script src="{{url_for('static',filename='js/jquery.min.js')}}"></script>
+    <script src="{{url_for('static',filename='js/owl.carousel.min.js')}}"></script>
+    <script src="{{url_for('static',filename='js/app.js')}}"></script>
+    <script src="{{ url_for('static',filename='js/bootstrap.bundle.min.js') }}"></script>
+
+
+    <script>
+        AOS.init();
+    </script>
+    <script src="{{url_for('static',filename='js/aos.js')}}"></script>
+    <!-- AOS -- Animation -->
+    <script src="{{ url_for('static',filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+
+</html>
