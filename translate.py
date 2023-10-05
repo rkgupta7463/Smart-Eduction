@@ -1,17 +1,7 @@
 from transformers import MBartForConditionalGeneration, MBart50TokenizerFast
 
 def translator(input_text, src_lang, tgt_lang):
-    '''
-    Translates input_text from src_lang to tgt_lang using the MBart model.
-
-    Args:
-        input_text (str): The input text to be translated.
-        src_lang (str): The source language code.
-        tgt_lang (str): The target language code.
-
-    Returns:
-        str: The translated text.
-    '''
+    
     model = MBartForConditionalGeneration.from_pretrained('facebook/mbart-large-50-many-to-many-mmt')
     tokenizer = MBart50TokenizerFast.from_pretrained('facebook/mbart-large-50-many-to-many-mmt')
     supported_langs = ['en_XX', 'gu_IN', 'hi_IN', 'bn_IN', 'ml_IN', 'mr_IN', 'ta_IN', 'te_IN']
