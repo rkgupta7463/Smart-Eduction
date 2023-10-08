@@ -39,7 +39,7 @@ Whether you need to communicate with international clients, understand foreign d
 5. **Efficient Document Translation**: TransLingua streamlines the translation of documents and PDF files, making it a valuable tool for businesses and professionals dealing with multilingual documentation.
 
 
-# 3. nstallation
+# 3. Installation
 
   Provide step-by-step instructions on how to install your project. Include any prerequisites and dependencies that need to be installed. For example:
 
